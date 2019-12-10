@@ -1,3 +1,3 @@
 # Hello World
 
-A simpple hello world application
+A simple hello world application
