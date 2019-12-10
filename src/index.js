@@ -12,5 +12,11 @@ app.set('port', port);
 
 const server = http.createServer(app);
 server.listen(port);
-server.on('error', () => console.log("Error"));
+
 server.on('listening', () => console.log(`Listening on ${server.address().port}`))
+
+process.on('SIGTERM', () => {
+  server.close(() => {
+    console.log('Process terminated')
+  })
+})
