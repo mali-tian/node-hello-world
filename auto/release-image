@@ -1,0 +1,18 @@
+#! /bin/bash -eu
+
+cd $(dirname $0)/..
+
+source auto/ecr-info
+
+VERSION=$(date +'%Y%m%d%H%M')
+IMAGE_NAME=node-hello-world
+DOCKER_IMAGE=${AWS_ACCOUNT}.dkr.ecr.${REGION}.amazonaws.com/${IMAGE_NAME}
+
+$(aws ecr get-login --region ${REGION} --no-include-email --profile ${PROFILE})
+
+docker build -t ${IMAGE_NAME}:build .
+
+# Release to new registry
+docker tag ${IMAGE_NAME} ${DOCKER_IMAGE}:${VERSION}
+docker tag ${IMAGE_NAME} ${DOCKER_IMAGE}:latest
+docker push ${DOCKER_IMAGE}:latest
