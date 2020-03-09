@@ -1,0 +1,13 @@
+#! /bin/bash -eu
+
+cd $(dirname $0)/..
+
+VERSION=$(date +'%Y%m%d%H%M')
+IMAGE_NAME=node-hello-world
+DOCKER_IMAGE=${IMAGE_NAME}
+
+docker build -t ${IMAGE_NAME}:local .
+
+# Release to new registry
+docker tag ${IMAGE_NAME}:local ${DOCKER_IMAGE}:${VERSION}
+docker tag ${IMAGE_NAME}:local ${DOCKER_IMAGE}:latest
