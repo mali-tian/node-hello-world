@@ -2,13 +2,9 @@
 
 cd $(dirname $0)/..
 
-source auto/ecr-info
-
 VERSION=$(date +'%Y%m%d%H%M')
 IMAGE_NAME=node-hello-world
-DOCKER_IMAGE=${AWS_ACCOUNT}.dkr.ecr.${REGION}.amazonaws.com/${IMAGE_NAME}
-
-$(aws ecr get-login --region ${REGION} --no-include-email --profile ${PROFILE})
+DOCKER_IMAGE=mali09tian/${IMAGE_NAME}
 
 docker build -t ${IMAGE_NAME}:build .
 
