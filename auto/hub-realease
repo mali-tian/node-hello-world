@@ -11,4 +11,3 @@ docker build -t ${IMAGE_NAME}:build .
 # Release to new registry
 docker tag ${IMAGE_NAME}:build ${DOCKER_IMAGE}:${VERSION}
 docker tag ${IMAGE_NAME}:build ${DOCKER_IMAGE}:latest
-docker push ${DOCKER_IMAGE}:latest
